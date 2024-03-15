@@ -5,9 +5,9 @@ import {
   ChatCompletionCreateParamsBase,
 } from "openai/resources/chat/completions";
 import { Stream } from "openai/streaming";
-import { API_KEY, MODEL } from "./constants.ts";
 
-const openAI = new OpenAI({ apiKey: API_KEY, dangerouslyAllowBrowser: true });
+const model = "gpt-3.5-turbo";
+const openAI = new OpenAI({ apiKey: process.env.REACT_APP_API_TOKEN, dangerouslyAllowBrowser: true });
 
 export async function handleRequest(
   requests: string[],
@@ -21,7 +21,7 @@ export async function handleRequest(
 
   const apiRequest: ChatCompletionCreateParamsBase = {
     messages,
-    model: MODEL,
+    model,
   };
 
   const response = await openAI.chat.completions.create(apiRequest);

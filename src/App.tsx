@@ -140,6 +140,8 @@ function App() {
     [data],
   );
 
+  console.log(process.env.API_ID);
+
   return (
     <FluentProvider theme={webDarkTheme} className="container">
       <div className="content">
