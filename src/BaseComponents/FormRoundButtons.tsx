@@ -9,7 +9,7 @@ const useStyle = makeStyles({
   },
   label: {
     flexGrow: 1,
-    width: 0,
+    width: 0
   },
   buttons: {
     display: "flex",
@@ -18,9 +18,8 @@ const useStyle = makeStyles({
   },
   button: {
     boxSizing: "border-box",
-    height: "48px",
-    width: "48px",
-    minWidth: "48px",
+    minWidth: '40px',
+    maxHeight: '40px',
     backgroundColor: tokens.colorCompoundBrandBackgroundHover,
   },
 });
@@ -38,11 +37,11 @@ export const FormRoundButtons = React.memo((props: FormInputProps) => {
         <Label size="large">{props.label}</Label>
       </div>
       <div className={style.buttons}>
-        <Button shape="circular" className={`${style.button}`}></Button>
-        <Button shape="circular" className={`${style.button}`}></Button>
-        <Button shape="circular" className={`${style.button}`}></Button>
-        <Button shape="circular" className={`${style.button}`}></Button>
-        <Button shape="circular" className={`${style.button}`}></Button>
+        <Button size='small' shape="circular" className={`${style.button}`}></Button>
+        <Button size='small' shape="circular" className={`${style.button}`}></Button>
+        <Button size='small' shape="circular" className={`${style.button}`}></Button>
+        <Button size='small' shape="circular" className={`${style.button}`}></Button>
+        <Button size='small' shape="circular" className={`${style.button}`}></Button>
       </div>
     </div>
   );

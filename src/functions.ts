@@ -12,10 +12,13 @@ const openAI = new OpenAI({ apiKey: API_KEY, dangerouslyAllowBrowser: true });
 export async function handleRequest(
   requests: string[],
 ): Promise<Stream<ChatCompletionChunk> | ChatCompletion> {
-  const messages: ChatCompletionCreateParamsBase["messages"] = requests.map((request) => ({
-    role: "system", content: request 
-  }));
-  
+  const messages: ChatCompletionCreateParamsBase["messages"] = requests.map(
+    (request) => ({
+      role: "system",
+      content: request,
+    }),
+  );
+
   const apiRequest: ChatCompletionCreateParamsBase = {
     messages,
     model: MODEL,

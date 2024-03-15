@@ -9,18 +9,16 @@ type ResponseProps = {
 
 const useStyle = makeStyles({
   root: {
-    paddingTop: '24px',
-    paddingBottom: '24px'
-  }
-})
+    paddingTop: "24px",
+    paddingBottom: "24px",
+  },
+});
 
 export const Response = React.memo((props: ResponseProps) => {
   const styles = useStyle();
 
   const generateText = React.useCallback(() => {
-    return props.content.map((value) => (
-      <Body1>{value}</Body1>
-    ))
+    return props.content.map((value) => <Body1>{value}</Body1>);
   }, [props.content]);
 
   return (

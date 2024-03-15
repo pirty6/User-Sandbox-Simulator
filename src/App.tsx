@@ -12,11 +12,12 @@ import { QuestionData, Questions } from "./Components/Questions.tsx";
 import { Uploads } from "./Components/Uploads.tsx";
 import { handleRequest } from "./functions.ts";
 import { Response } from "./Components/Response.tsx";
+import { ExtraData, ExtraInformation } from "./Components/ExtraInformation.tsx";
 
 function generateScripts(data: DataType): string[] {
   const basicDataScript = generateBasicInformationScript(data.basicData);
   const basicDataScriptPart2 = generateBasicInformationPart2Script(
-    data.basicData,
+    data.extraData,
   );
 
   const basicScript = `${basicDataScript} ${basicDataScriptPart2}`.trim();
@@ -41,8 +42,8 @@ function generateBasicInformationScript(basicData: BasicData): string {
   return `${nameScript} ${ageScript} ${genderScript} ${occupationScript} ${countryResidenceScript}`.trim();
 }
 
-function generateBasicInformationPart2Script(basicData: BasicData): string {
-  const { countryOrigin, income, householdSize } = basicData;
+function generateBasicInformationPart2Script(extraData: ExtraData): string {
+  const { countryOrigin, income, householdSize } = extraData;
   const countryResidenceScript =
     countryOrigin.length > 0 ? `They are from ${countryOrigin}` : "";
   const incomeScript =
@@ -66,12 +67,13 @@ function generateHumanizeAIScript(name: string): string {
 
 function generateQuestionsScript(questionData: QuestionData): string {
   const array = Object.values(questionData);
-  return array.join(' ').trim();
+  return array.join(" ").trim();
 }
 
 type DataType = {
   profilePicture: string;
   basicData: BasicData;
+  extraData: ExtraData;
   questionData: QuestionData;
 };
 
@@ -83,7 +85,9 @@ function App() {
       age: "",
       gender: "",
       occupation: "",
-      countryResidence: "",
+      countryResidence: ""
+    },
+    extraData: {
       countryOrigin: "",
       income: "",
       householdSize: "",
@@ -96,7 +100,6 @@ function App() {
     },
   });
   const [response, setResponse] = React.useState<string[]>([]);
-
 
   const submitForm = React.useCallback(() => {
     if (data.basicData.name.length === 0) {
@@ -140,18 +143,19 @@ function App() {
   return (
     <FluentProvider theme={webDarkTheme} className="container">
       <div className="content">
-        <div className="row" style={{ height: "50vh" }}>
+        <div className="row">
           <div className="column">
             <ProfilePicture profilePicture={data.profilePicture} />
           </div>
           <div className="column">
             <BasicInformation updateData={updateData} data={data.basicData} />
+            <ExtraInformation updateData={updateData} data={data.extraData} />
           </div>
           <div className="column">
             <DemographicData />
           </div>
         </div>
-        <div className="row" style={{ height: "25vh" }}>
+        <div className="row">
           <div className="column">
             <Questions updateData={updateData} data={data.questionData} />
           </div>
@@ -166,10 +170,7 @@ function App() {
         </div>
         <div>
           {response.length > 0 ? (
-            <Response
-              title='Character Profile'
-              content={response}
-            />
+            <Response title="Character Profile" content={response} />
           ) : null}
         </div>
       </div>

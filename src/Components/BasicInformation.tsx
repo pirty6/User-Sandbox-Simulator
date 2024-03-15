@@ -7,24 +7,14 @@ import {
 } from "../BaseComponents/index.ts";
 
 const useFormStyles = makeStyles({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    height: "100%",
-  },
-  firstForm: {
-    display: "flex",
-  },
-  column: {
-    flexGrow: 2,
+  form: {
+    position: "relative",
+    marginBottom: "24px",
   },
   button: {
-    width: 0,
-    flexGrow: 1,
-    display: "flex",
-    justifyContent: "flex-end",
-    alignItems: "flex-start",
+    position: "absolute",
+    top: "4px",
+    right: "4px",
   },
 });
 
@@ -34,15 +24,14 @@ export type BasicData = {
   gender: string;
   occupation: string;
   countryResidence: string;
-  countryOrigin: string;
-  income: string;
-  householdSize: string;
-};
+}
 
 type BasicInformationProps = {
   updateData: (entry: { basicData: BasicData }) => void;
   data: BasicData;
 };
+
+const dataLabelsPart1 = ['Name', 'Age', 'Gender', 'Occupation', 'Country of Residence'];
 
 export const BasicInformation = React.memo((props: BasicInformationProps) => {
   const style = useFormStyles();
@@ -59,72 +48,35 @@ export const BasicInformation = React.memo((props: BasicInformationProps) => {
     [props],
   );
 
+  const createForm = React.useCallback((data: BasicData, dataLabels: string[]) => {
+    return Object.entries(data).map((entry: [key: string, value: string], index) => {
+      const key = entry[0];
+      const value = entry[1];
+      const label = dataLabels[index];
+
+      return (
+      <div key={key}>
+        <FormInput
+          id={key}
+          label={label}
+          value={value}
+          onChange={(event) => onChange(event, key)}
+        />
+      </div>
+      )
+    });
+  }, [onChange])
+
   return (
-    <div className={style.root}>
-      <div>
+      <div className={style.form}>
         <FormContainer>
-          <div className={style.firstForm}>
-            <div className={style.column}>
-              <FormInput
-                id={"name"}
-                label={"Name"}
-                value={props.data.name}
-                onChange={(event) => onChange(event, "name")}
-              />
-              <FormInput
-                id={"age"}
-                label={"Age"}
-                value={props.data.age}
-                onChange={(event) => onChange(event, "age")}
-              />
-              <FormInput
-                id={"gender"}
-                label={"Gender"}
-                value={props.data.gender}
-                onChange={(event) => onChange(event, "gender")}
-              />
-              <FormInput
-                id={"occupation"}
-                label={"Occupation"}
-                value={props.data.occupation}
-                onChange={(event) => onChange(event, "occupation")}
-              />
-              <FormInput
-                id={"countryResidence"}
-                label={"Country of Residence"}
-                value={props.data.countryResidence}
-                onChange={(event) => onChange(event, "countryResidence")}
-              />
-            </div>
-            <div className={style.button}>
-              <RandomButton />
-            </div>
+          <div>
+           {createForm(props.data, dataLabelsPart1)}
+          </div>
+          <div className={style.button}>
+            <RandomButton />
           </div>
         </FormContainer>
       </div>
-
-      <div>
-        <FormContainer>
-          <FormInput
-            id={"countryOrigin"}
-            label={"Country of Origin"}
-            value={props.data.countryOrigin}
-            onChange={(event) => onChange(event, "countryOrigin")}
-          />
-          <FormInput
-            id={"income"}
-            label={"Annual Household Income"}
-            value={props.data.income}
-            onChange={(event) => onChange(event, "income")}
-          />
-          <FormInput
-            id={"householdSize"}
-            label={"Household Size"}
-            value={props.data.householdSize}
-            onChange={(event) => onChange(event, "householdSize")}
-          />
-        </FormContainer>
-      </div>
-    </div>
   );
 });

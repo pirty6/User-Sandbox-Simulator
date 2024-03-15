@@ -14,9 +14,10 @@ const inputDataNames = [
 ];
 
 const useStyles = makeStyles({
-  header: {
-    display: "flex",
-    justifyContent: "space-between",
+  button: {
+    position: "absolute",
+    top: "4px",
+    right: "4px",
   },
   content: {
     boxSizing: "border-box",
@@ -24,6 +25,10 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     height: "100%",
+  },
+  form: {
+    height: "100%",
+    position: "relative",
   },
 });
 
@@ -45,12 +50,14 @@ export const DemographicData = React.memo((props) => {
   );
 
   return (
-    <FormContainer>
-      <div className={style.header}>
+    <div className={style.form}>
+      <FormContainer>
         <Title3>Reliance on Demographic Data</Title3>
-        <RandomButton />
-      </div>
-      {createForm(inputDataNames)}
-    </FormContainer>
+        <div className={style.button}>
+          <RandomButton />
+        </div>
+        {createForm(inputDataNames)}
+      </FormContainer>
+    </div>
   );
 });
