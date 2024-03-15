@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.e55a1a72.css",
-    "main.js": "/static/js/main.c38fd260.js",
-    "static/js/453.ed3810f9.chunk.js": "/static/js/453.ed3810f9.chunk.js",
-    "index.html": "/index.html",
-    "main.e55a1a72.css.map": "/static/css/main.e55a1a72.css.map",
-    "main.c38fd260.js.map": "/static/js/main.c38fd260.js.map",
-    "453.ed3810f9.chunk.js.map": "/static/js/453.ed3810f9.chunk.js.map"
+    "main.css": "/User-Sandbox-Simulator/static/css/main.e55a1a72.css",
+    "main.js": "/User-Sandbox-Simulator/static/js/main.907d861d.js",
+    "static/js/453.ed3810f9.chunk.js": "/User-Sandbox-Simulator/static/js/453.ed3810f9.chunk.js",
+    "index.html": "/User-Sandbox-Simulator/index.html",
+    "main.e55a1a72.css.map": "/User-Sandbox-Simulator/static/css/main.e55a1a72.css.map",
+    "main.907d861d.js.map": "/User-Sandbox-Simulator/static/js/main.907d861d.js.map",
+    "453.ed3810f9.chunk.js.map": "/User-Sandbox-Simulator/static/js/453.ed3810f9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e55a1a72.css",
-    "static/js/main.c38fd260.js"
+    "static/js/main.907d861d.js"
   ]
 }
